@@ -26,20 +26,17 @@ else
 end
 
 
-workspace(string.lower(lua_state..vaas.project_name))
-	configurations{'Release','Debug'}
-	location(os.target()..'-'.._ACTION)
+workspace(string.lower(lua_state..vaas.project_name))	--Name automatically converted to lower case to prevent stupid issues
+	configurations{'Debug','Release'}
+	location('projects/'..os.target())
 
-	project(string.lower(lua_state..vaas.project_name))	--Name automatically converted to lower case to prevent stupid issues
+	project(string.lower(lua_state..vaas.project_name))
 		kind'SharedLib'
 		architecture'x86_64'	--Support that damn update facepunch is insistant on doing?	
-		language'C++' --What language is the project(this might end up moving to the config, but fuck C#.)
-		includedirs{vaas.dependancies_folder}	--Handles dependancies folder from the config
-		targetdir('lib/'..os.target()..'/')
+		language'C++'	--What language is the project(this might end up moving to the config, but fuck C#.)
+		includedirs(vaas.dependancies_folder) 	--Handles dependancies folder from the config
+		targetdir'build'
 
-		defines{'GMMODULE'}
-
-		flags{'NoPCH'}
 		for k,v in pairs(vaas.solution_calls)do	--Applies Flags from the table for easy configuration
 			vaas.solution_calls.v()
 		end
@@ -49,7 +46,6 @@ workspace(string.lower(lua_state..vaas.project_name))
 				vaas.debug_flags.v()
 			end
 		configuration'Release'
-			defines{'NDEBUG'}
 			for k,v in pairs(vaas.release_flags)do	--Flag handling
 				vaas.release_flags.v()
 			end
