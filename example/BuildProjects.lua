@@ -28,11 +28,12 @@ end
 
 workspace(string.lower(lua_state..vaas.project_name))	--Name automatically converted to lower case to prevent stupid issues
 	configurations{'Debug','Release'}
+	platforms{'x86','x86-64'}
 	location('projects/'..os.target())
 
 	project(string.lower(lua_state..vaas.project_name))
 		kind'SharedLib'
-		architecture'x86_64'	--Support that damn update facepunch is insistant on doing?	
+
 		language'C++'	--What language is the project(this might end up moving to the config, but fuck C#.)
 		includedirs(vaas.dependancies_folder) 	--Handles dependancies folder from the config
 		targetdir'build'
@@ -40,6 +41,12 @@ workspace(string.lower(lua_state..vaas.project_name))	--Name automatically conve
 		for k,v in pairs(vaas.solution_calls)do	--Applies Flags from the table for easy configuration
 			vaas.solution_calls.v()
 		end
+		
+		filter'platforms:x86'
+			architecture'x86'
+		filter'platforms:x64'
+			architecture'x86_64'
+		filter{}
 
 		configuration'Debug'
 			for k,v in pairs(vaas.debug_flags)do	--Flag handling
