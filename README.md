@@ -12,7 +12,7 @@ The generated dlls should be placed in:
 garrysmod/lua/bin/
 
 
-
+Module located in lib folder after building it.
 They should also be named approriately:
 gmsv_vaas_example_win32.dll     <- require('vaas_example') serverside on windows
 gmsv_vaas_example_linux.dll     <- require('vaas_example') serverside on linux
