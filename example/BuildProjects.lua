@@ -12,6 +12,9 @@ end
 
 solution(string.lower(lua_state..vaas.project_name))
 	language'C++' --What language is the project(this might end up moving to the config, but fuck C#.)
+
+	architecture'x86_64'	--Support that damn update facepunch is insistant on doing?
+
 	location(os.target()..'-'.._ACTION)
 	flags{'NoPCH'}
 
