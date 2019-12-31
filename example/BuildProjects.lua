@@ -1,35 +1,26 @@
-local project_name = 'vaas_example'
-local serverside = true
-local solution_calls = {
-	symbols'On',
-	editandcontinue'Off',
-	staticruntime'On',
-	vectorextensions'SSE'
-}
-local configuration_calls = {
-	optimize'On',
-	floatingpoint'Fast'
-}
-local dependancies_folder = '../include/'
-local source_folder = 'src/'
+vaas = {}
+include'ProjectConfig.lua'	--Includes the config
 
-
-local lua_state = 'gmsv_'
-if serverside == false then
+local lua_state			--Auto handles project namming
+if vaas.serverside == false then
 	lua_state = 'gmcl_'
+elseif vaas.serverside == true then
+	lua_state = 'gmsv_'
+elseif vaas.serverside == 'shared' then
+	lua_state = 'gm_'	--You will still have to rename it later
 end
 
-solution(lua_state..project_name)
-	language'C++'
+solution(string.lower(lua_state..vaas.project_name))
+	language'C++' --What language is the project(this might end up moving to the config, but fuck C#.)
 	location(os.target()..'-'.._ACTION)
 	flags{'NoPCH'}
 
-	for k,v in pairs(solution_calls)do
-		solution_calls.v()
+	for k,v in pairs(vaas.solution_calls)do	--Applies Flags from the table for easy configuration
+		vaas.solution_calls.v()
 	end
 	
 	targetdir('lib/'..os.target()..'/')
-	includedirs{dependancies_folder}
+	includedirs{vaas.dependancies_folder}	--Handles dependancies folder from the config
 	
 	configurations
 	{ 
@@ -38,11 +29,11 @@ solution(lua_state..project_name)
 	
 	configuration'Release'
 		defines{'NDEBUG'}
-		for k,v in pairs(configuration_calls)do
-			configuration_calls.v()
+		for k,v in pairs(vaas.configuration_calls)do	--Flag handling
+			vaas.configuration_calls.v()
 		end
 
-	project(lua_state..project_name)
+	project(string.lower(lua_state..vaas.project_name))	--Name automatically converted to lower case to prevent stupid issues
 		defines{'GMMODULE'}
-		files{source_folder..'**.*',dependancies_folder..'**.*'}
+		files{vaas.source_folder..'**.*',vaas.dependancies_folder..'**.*'}--Handles the source folder from the config
 		kind'SharedLib'
