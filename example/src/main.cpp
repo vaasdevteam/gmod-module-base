@@ -1,3 +1,4 @@
+//Credit to Willox for the main.cpp itself
 #include "GarrysMod/Lua/Interface.h"
 
 using namespace GarrysMod;
