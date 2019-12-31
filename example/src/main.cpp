@@ -1,7 +1,8 @@
 //Credit to Willox for the main.cpp itself
 #include "GarrysMod/Lua/Interface.h"
+#include <stdio.h>
 
-using namespace GarrysMod;
+using namespace GarrysMod::Lua;
 
 int ExampleFunction(lua_State *state) {
   LUA->PushString("Hello from Example()!");
