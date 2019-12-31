@@ -11,8 +11,8 @@ int ExampleFunction(lua_State *state) {
 //Called when your module is opened
 GMOD_MODULE_OPEN(){
   LUA->PushSpecial(Lua::SPECIAL_GLOB);
-  LUA->PushString("ExampleFunction");
-  LUA->PushCFunction(ExampleFunction);
+    LUA->PushString("ExampleFunction");
+    LUA->PushCFunction(ExampleFunction);
   LUA->SetTable(-3);
 
   return 0;
