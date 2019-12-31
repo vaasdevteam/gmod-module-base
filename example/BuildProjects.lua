@@ -29,7 +29,7 @@ end
 workspace(string.lower(lua_state..vaas.project_name))	--Name automatically converted to lower case to prevent stupid issues
 	configurations{'Debug','Release'}
 	platforms{'x86','x86-64'}
-	location('projects/'..os.target())
+	location('os.target())
 
 	project(string.lower(lua_state..vaas.project_name))
 		kind'SharedLib'
