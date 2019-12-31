@@ -1,22 +1,45 @@
-solution "gmsv_example"
+local project_name = 'vaas_example'
+local serverside = true
+local solution_calls = {
+	symbols'On',
+	editandcontinue'Off',
+	staticruntime'On',
+	vectorextensions'SSE'
+}
+local configuration_calls = {
+	optimize'On',
+	floatingpoint'Fast'
+}
 
-	language "C++"
-	location ( os.get() .."-".. _ACTION )
-	flags { "Symbols", "NoEditAndContinue", "NoPCH", "StaticRuntime", "EnableSSE" }
-	targetdir ( "lib/" .. os.get() .. "/" )
-	includedirs { "../include/" }
+local lua_state = 'gmsv_'
+if serverside == false then
+	lua_state = 'gmcl_'
+end
+
+solution(lua_state..project_name)
+	language'C++'
+	location(os.target()..'-'.._ACTION)
+	flags{'NoPCH'}
+
+	for k,v in pairs(solution_calls)do
+		solution_calls.v()
+	end
+	
+	targetdir('lib/'..os.target()..'/')
+	includedirs{'../include/'}
 	
 	configurations
 	{ 
-		"Release"
+		'Release'
 	}
 	
-	configuration "Release"
-		defines { "NDEBUG" }
-		flags{ "Optimize", "FloatFast" }
-	
-	project "gmsv_example"
-		defines { "GMMODULE" }
-		files { "src/**.*", "../include/**.*" }
-		kind "SharedLib"
-		
+	configuration'Release'
+		defines{'NDEBUG'}
+		for k,v in pairs(configuration_calls)do
+			configuration_calls.v()
+		end
+
+	project(lua_state..project_name)
+		defines{'GMMODULE'}
+		files{'src/**.*','../include/**.*'}
+		kind'SharedLib'
