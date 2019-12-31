@@ -10,6 +10,9 @@ local configuration_calls = {
 	optimize'On',
 	floatingpoint'Fast'
 }
+local dependancies_folder = '../include/'
+local source_folder = 'src/'
+
 
 local lua_state = 'gmsv_'
 if serverside == false then
@@ -26,7 +29,7 @@ solution(lua_state..project_name)
 	end
 	
 	targetdir('lib/'..os.target()..'/')
-	includedirs{'../include/'}
+	includedirs{dependancies_folder}
 	
 	configurations
 	{ 
@@ -41,5 +44,5 @@ solution(lua_state..project_name)
 
 	project(lua_state..project_name)
 		defines{'GMMODULE'}
-		files{'src/**.*','../include/**.*'}
+		files{source_folder..'**.*',dependancies_folder..'**.*'}
 		kind'SharedLib'
