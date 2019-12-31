@@ -1,18 +1,26 @@
 #include "GarrysMod/Lua/Interface.h"
+#include <stdio.h>
 
-using namespace GarrysMod;
+using namespace GarrysMod::Lua;
 
-int Example(lua_State *state) {
+int ExampleFunction(lua_State *state) {
   LUA->PushString("Hello from Example()!");
 
   return 1;
 }
 
+//Called when your module is opened
 GMOD_MODULE_OPEN(){
-    LUA->PushSpecial(Lua::SPECIAL_GLOB);
-    LUA->PushString("Example");
-    LUA->PushCFunction(Example);
-    LUA->SetTable(-3);
+  LUA->PushSpecial(Lua::SPECIAL_GLOB);
+  LUA->PushString("ExampleFunction");
+  LUA->PushCFunction(ExampleFunction);
+  LUA->SetTable(-3);
 
-    return 0;
+  return 0;
+}
+
+//Called when your module is closed
+GMOD_MODULE_CLOSE()
+{
+  return 0;
 }
