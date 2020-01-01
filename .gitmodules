@@ -1,0 +1,15 @@
+[submodule "detouring"]
+	path = include/detouring
+	url = https://github.com/danielga/detouring.git
+[submodule "scanning"]
+	path = include/scanning
+	url = https://github.com/danielga/scanning.git
+[submodule "garrysmod_common"]
+	path = include/garrysmod_common
+	url = https://github.com/danielga/garrysmod_common.git
+[submodule "gm_ffi"]
+	path = include/gm_ffi
+	url = https://github.com/danielga/gm_ffi.git
+[submodule "sourcesdk-minimal"]
+  path = include/sourcesdk-minimal
+  url = https://github.com/danielga/sourcesdk-minimal
