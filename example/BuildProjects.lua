@@ -41,19 +41,22 @@ workspace(string.lower(lua_state..vaas.project_name))	--Name automatically conve
 		for k,v in pairs(vaas.solution_calls)do	--Applies Flags from the table for easy configuration
 			vaas.solution_calls.v()
 		end
-		
+
 		filter'platforms:x86'
 			architecture'x86'
 		filter'platforms:x64'
 			architecture'x86_64'
 		filter{}
 
+		libdirs{vaas.dependancies_folder}
 		configuration'Debug'
-			for k,v in pairs(vaas.debug_flags)do	--Flag handling
+			links{'lua_shared.lib'}
+			for k,v in pairs(vaas.debug_flags)do
 				vaas.debug_flags.v()
 			end
 		configuration'Release'
-			for k,v in pairs(vaas.release_flags)do	--Flag handling
+			links{'lua_shared.lib'}
+			for k,v in pairs(vaas.release_flags)do
 				vaas.release_flags.v()
 			end
 		configuration{}
