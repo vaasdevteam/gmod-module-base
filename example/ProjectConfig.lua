@@ -13,5 +13,13 @@ vaas.configuration_calls = {		--Same reason as above with vaas.solution_calls
 	floatingpoint'Fast'
 }
 
+vaas.release_flags = {		--Same reason as above with vaas.solution_calls
+	--optimize'Speed',
+	--floatingpoint'Fast'
+}
+vaas.debug_flags = {		--Same reason as above with vaas.solution_calls
+	--optimize'Debug',
+}
+
 vaas.dependancies_folder = '../include/'--location of your includes folder(should be left alone but hey do what ever you want)
 vaas.source_folder = 'src/'		--location folder of the modules source code
